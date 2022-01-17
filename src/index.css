@@ -4,3 +4,8 @@
   box-sizing: border-box;
 }
 
+body {
+  font-family: "Roboto";
+  font-size: 62.5%;
+  line-height: 1;
+}
