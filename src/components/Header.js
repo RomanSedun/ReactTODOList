@@ -1,8 +1,7 @@
-import React from "react";
-import TodoInput from "./TodoInput";
+import React from 'react';
+import TodoInput from './TodoInput';
 
-const Header = (props) => {
-
+function Header(props) {
   const handleSave = (text) => {
     if (text.length !== 0) {
       props.addTodo(text);

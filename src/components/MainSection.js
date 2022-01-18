@@ -1,33 +1,31 @@
-import React, { useState } from "react";
-import TodoItem from "./TodoItem";
-import Footer from "./Footer";
+import React, { useState } from 'react';
+import TodoItem from './TodoItem';
+import Footer from './Footer';
 import {
   SHOW_ALL,
   SHOW_COMPLETED,
-  SHOW_ACTIVE
-} from "../constants/TodoFilters";
+  SHOW_ACTIVE,
+} from '../constants/TodoFilters';
 
-const MainSection = (props) => {
-
+function MainSection(props) {
   const [state, setState] = useState({ filter: SHOW_ALL });
 
   const TODO_FILTERS = {
     [SHOW_ALL]: () => true,
-    [SHOW_ACTIVE]: todo => !todo.completed,
-    [SHOW_COMPLETED]: todo => todo.completed
+    [SHOW_ACTIVE]: (todo) => !todo.completed,
+    [SHOW_COMPLETED]: (todo) => todo.completed,
   };
 
   const handleClearCompleted = () => {
     props.actions.clearCompleted();
   };
 
-  const handleShow = filter => {
+  const handleShow = (filter) => {
     setState({ filter });
   };
 
-  const renderToggleAll = (completedCount) => {
+  function renderToggleAll(completedCount) {
     const { todos, actions } = props;
-
     if (todos.length > 0) {
       return (
         <input
@@ -39,7 +37,7 @@ const MainSection = (props) => {
     }
   }
 
-  const renderFooter = (completedCount) => {
+  function renderFooter(completedCount) {
     const { todos } = props;
     const { filter } = state;
     const activeCount = todos.length - completedCount;
@@ -61,7 +59,7 @@ const MainSection = (props) => {
   const { filter } = state;
   const filteredTodos = todos.filter(TODO_FILTERS[filter]);
   const completedCount = todos.reduce(
-    (count, todo) => todo.completed ? count + 1 : count,
+     (count, todo) => todo.completed ? count + 1 : count,
     0
   );
 
