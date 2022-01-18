@@ -1,8 +1,7 @@
-import React, { useState } from "react";
-import TodoInput from "./TodoInput";
+import {React, useState } from 'react';
+import TodoInput from './TodoInput';
 
-const TodoItem = ({todo, completeTodo, deleteTodo, editTodo}) => {
-
+function TodoItem({todo, completeTodo, deleteTodo, editTodo}) {
   const [state, setState] = useState(false);
 
   const handleDoubleClick = () => {
@@ -24,7 +23,7 @@ const TodoItem = ({todo, completeTodo, deleteTodo, editTodo}) => {
       <TodoInput
         text={todo.text}
         editing={state.editing}
-        onSave={text => handleSave(todo.id, text)}
+        onSave={(text) => handleSave(todo.id, text)}
       />
     );
   } else {

@@ -1,15 +1,13 @@
-import React, {useState} from "react";
+import {React, useState} from 'react';
 
-const TodoInput = (props) => {
-
-  const [state, setState] = useState("");
-
+function TodoInput(props) {
+  const [state, setState] = useState('');
   const handleSubmit = (e) => {
     const text = e.target.value.trim();
     if (e.which === 13) {
       props.onSave(text);
       if (props.newTodo) {
-        setState({ text: "" });
+        setState({ text: '' });
       }
     }
   };
@@ -22,7 +20,7 @@ const TodoInput = (props) => {
     <input
       type="text"
       placeholder={props.placeholder}
-      value={state.text || ""}
+      value={state.text || ''}
       onChange={handleChange}
       onKeyDown={handleSubmit}
     />
