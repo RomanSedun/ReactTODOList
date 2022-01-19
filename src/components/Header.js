@@ -10,7 +10,6 @@ function Header(props) {
 
   return (
     <div>
-      <h1>todos</h1>
       <TodoInput
         newTodo
         onSave={handleSave}

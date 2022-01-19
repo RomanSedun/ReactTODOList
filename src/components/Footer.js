@@ -1,11 +1,62 @@
-import React from 'react';
+import React, {useState} from 'react';
+import styled from 'styled-components';
 import {
   SHOW_ALL,
   SHOW_COMPLETED,
   SHOW_ACTIVE,
 } from '../constants/TodoFilters';
 
+const FooterPanel = styled.ul`
+display: flex;
+justify-content: center;
+position: absolute;
+left: 0;
+right: 0;
+margin: auto;
+top: 5px;
+
+@media (max-width: 450px) {
+  top: 36px;
+}
+`;
+
+const FooterList = styled.li`
+list-style: none;
+`;
+
+const FooterText = styled.span`
+font-size: 14px;
+position: absolute;
+top: 12px;
+left: 15px;
+`;
+
+const FooterListBtn = styled.button`
+border-radius: 3px;
+border: 1px solid rgba(175, 47, 47, 0.2);
+background: transparent;
+margin: 3px;
+padding: 3px 7px;
+cursor: pointer;
+color: #777;
+`;
+
+const FooterBtn = styled.button`
+position: absolute;
+top: 12px;
+right: 15px;
+border: none;
+background: transparent;
+cursor: pointer;
+color: #777;
+&:hover {
+  text-decoration: underline;
+}
+`;
+
 function Footer(props) {
+  const [toggle, setToggle] = useState(false);
+
   const FILTER_TITLES = {
     [SHOW_ALL]: 'All',
     [SHOW_ACTIVE]: 'Active',
@@ -17,11 +68,13 @@ function Footer(props) {
     const itemWord = activeCount === 1 ? 'item' : 'items';
 
     return (
-      <span>
+      <FooterText>
         {activeCount || 'No'}
+        {" "}
         {itemWord}
+        {" "}
         left
-      </span>
+      </FooterText>
     );
   };
 
@@ -30,12 +83,12 @@ function Footer(props) {
     const { filter: [], onShow } = props;
 
     return (
-      <button
+      <FooterListBtn
         type="button"
-        onClick={() => onShow(filter)}
+        onClick={() => {onShow(filter); setToggle(true);}}
       >
         {title}
-      </button>
+      </FooterListBtn>
     );
   };
 
@@ -43,28 +96,28 @@ function Footer(props) {
     const { completedCount, onClearCompleted } = props;
     if (completedCount > 0) {
       return (
-        <button
+        <FooterBtn
           type="button"
           onClick={onClearCompleted}
         >
           Clear completed
-        </button>
+        </FooterBtn>
       );
     }
   }
 
   return (
-    <div>
+    <>
       {renderTodoCount()}
-      <ul>
+      <FooterPanel>
         {[SHOW_ALL, SHOW_ACTIVE, SHOW_COMPLETED].map((filter) => (
-          <li key={filter}>
+          <FooterList key={filter}>
             {renderFilterLink(filter)}
-          </li>
+          </FooterList>
         ))}
-      </ul>
+      </FooterPanel>
       {renderClearButton()}
-    </div>
+    </>
   );
 }
 
